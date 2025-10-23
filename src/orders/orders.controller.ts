@@ -26,7 +26,7 @@ export class OrdersController {
     try {
       const order = await firstValueFrom(
         this.ordersClient.send('findOneOrder', { id }
-      ));
+        ));
       return order;
     } catch (error) {
       throw new RpcException(error);
@@ -43,6 +43,18 @@ export class OrdersController {
         ...paginationDto,
         status: statusDto.status
       })
+    } catch (error) {
+      throw new RpcException(error);
+    }
+  }
+
+  @Patch(':id')
+  changeStatus(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Body() statusDto: StatusDto
+  ) {
+    try {
+      return this.ordersClient.send('changeOrderStatus', { id, status: statusDto.status });
     } catch (error) {
       throw new RpcException(error);
     }
