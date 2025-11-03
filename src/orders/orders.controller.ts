@@ -21,7 +21,7 @@ export class OrdersController {
     return this.ordersClient.send('findAllOrders', orderPaginationDto);
   }
 
-  @Get('id/ :id')
+  @Get('id/:id')
   async findOne(@Param('id', ParseUUIDPipe) id: string) {
     try {
       const order = await firstValueFrom(
