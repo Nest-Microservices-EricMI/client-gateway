@@ -19,6 +19,14 @@ async function bootstrap() {
 
   app.useGlobalFilters(new RpcCustomExceptionFilter());
 
+  // Enable CORS for Angular frontend
+  app.enableCors({
+    origin: 'http://localhost:4200',
+    credentials: true,
+    methods: ['GET', 'POST', 'PATCH', 'DELETE', 'OPTIONS'],
+    allowedHeaders: ['Content-Type', 'Authorization'],
+  });
+
   await app.listen(envs.port);
 
   logger.log(`Gateway running on port ${envs.port}`);
