@@ -13,7 +13,7 @@ export class ProductsController {
   ) { }
 
   @Post()
-  createProduct(createProductDto: CreateProductDto) {
+  createProduct(@Body() createProductDto: CreateProductDto) {
     return this.client.send({ cmd: 'create_product' }, createProductDto);
   }
 
